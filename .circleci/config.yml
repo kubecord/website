@@ -13,7 +13,7 @@ jobs:
       - deploy:
           name: Deploy to S3
           command: |
-            s4cmd sync . s3://$S3_BUCKET/
+            s4cmd --API-ACL=public-read sync ./ s3://$S3_BUCKET/
 workflows:
   version: 2
   deploy:
