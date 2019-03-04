@@ -1,0 +1,24 @@
+version: 2
+jobs:
+  deploy:
+    working_directory: /app
+    docker:
+      - image: python:alpine
+    steps:
+      - checkout
+      - run:
+          name: Install S4Cmd
+          command: |
+            pip install s4cmd
+      - deploy:
+          name: Deploy to S3
+          command: |
+            s4cmd sync . s3://$S3_BUCKET/
+workflows:
+  version: 2
+  deploy:
+    jobs:
+      - deploy:
+          filters:
+            branches:
+              only: master
