@@ -10,6 +10,10 @@ jobs:
           name: Install S4Cmd
           command: |
             pip install s4cmd
+      - run:
+          name: Clean up files we don't need
+          command: |
+            rm -rf .git .circleci
       - deploy:
           name: Deploy to S3
           command: |
